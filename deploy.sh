@@ -14,6 +14,6 @@ git add -A
 git commit -m 'deploy'
 
 # 部署到 https://<USERNAME>.github.io/<REPO>
-git push -f https://github.com/leanneluorl/f2e_week2.git master:gh-pages
+git push -f https://github.com/leanneluorl/F2E_week2.git master:gh-pages
 
 cd -
