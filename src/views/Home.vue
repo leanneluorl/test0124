@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HomeContent msg="F2E"/>
+    <HomeContent msg="F2E week2"/>
   </div>
 </template>
 
