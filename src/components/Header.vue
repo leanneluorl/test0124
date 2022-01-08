@@ -2,8 +2,13 @@
 <template>
     <header class="header">
         <div class="logo-image">
-            <img src="./../img/logo_white.png" alt="" class="logo-white">
-            <p>Bike Fun！自行車旅遊網</p>
+            <img src="./../img/urkitchen_head.png" alt="" class="logo-white">
+        </div>
+        <div class="serach-box yellow">
+            <form>
+                <input type="text" placeholder="Search Recipe..." id="searchRecipe">
+                <input type="button" onclick="searchRecipes();"/>
+            </form>
         </div>
         <Navbar />
     </header>
@@ -20,28 +25,47 @@ export default {
 
 <style lang="scss">
     header.header{
+        margin: 0;
+        border: 0;
+        font-size: 0;
         width: auto;
-        height: 70vh;
-        background: url("./../img/bg-index.jpg") no-repeat top -30px center / 1440px auto;
-        position: relative;
-        @extend .flex;
-        justify-content: center;
-        align-content: center;
-        align-items: center;
+        height: 25vh;
+        background-color: $primary-g;
+        display: flex;
+        flex-flow: column;
+        justify-content: flex-end;
+        align-items: flex-end;
         .logo-image{
-            width: 55%;
-            padding-bottom: 15vh;
-            margin:auto;
-            position: relative;
+            width: 100%;
+            height: fit-content;
+            flex: 0 1 auto;
+            text-align: right;
             img{
-                width: 38vw;
-                text-align: left;
+                width: 85%;
+                min-width: calc( 100% - 100px);
+                height: auto;
             }
-            p {
-                text-align: right;
-                color: #fff;
-                margin-block-end: 0;
-                margin-block-start: 0;
+        }
+
+        .serach-box {
+            flex: 1 1 auto;
+            width: 70%;
+            text-align: right;
+            border-radius: 20px;
+            @extend .flex;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            font-size: 16px;
+            input[type='button'] {
+                background: url(./../img/svg/search.svg) no-repeat center center / 80% 80%, #ccc;
+                width: 24px;
+                height:24px;
+                margin-left: 5px;
+                &:hover {
+                    filter: contrast(1) invert(1);
+                    background-color: $primary-g-dark;
+                }
             }
         }
     }

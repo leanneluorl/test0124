@@ -49,28 +49,31 @@ export default {
 <style lang="scss">
     .nav-box{
         overflow: hidden;
-        max-width: 1440px;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 100px;
+        width: 100px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 15%;
+        height: 100%;
         line-height: 100px;
-        background-color: #fff;
-        border-radius: 50px 50px 0 0 ;
-        text-align: center;
+        border-radius: 0 30px 30px 0 ;
+        text-align: left;
         border-bottom: 1px solid $light-grey;
-        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        background-color: $primary-g-dark;
         a{  
             text-decoration: inherit;
-            display: inline-block;
-            width: 18%;
+            display: block;
+            width: 100%;
             float: left;
-            vertical-align: middle;
             border-left: 1px solid $light-grey;
-            
+            height: 15%;
             &:first-of-type{
-                width: 28%;
-                height: 100%;
+                
+                
                 @extend .flex-nowrap;
                 flex-direction: column;
                 align-items: center;
