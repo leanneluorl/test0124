@@ -7,8 +7,7 @@
 		</section>
 		<section class="news-wrap news">
 			<div class="section-title">最新消息</div>
-			
-			<div class="news-items-content" v-for="news in $store.state.news" :style="{ backgroundImage: `url(${news.image})` }">
+			<div class="news-items-content" v-for="{news, index} in $store.state.news" :key="'news'+index " :style="{ backgroundImage: `url(${news.image})` }">
 				<p class="news-items-content-date">{{ news.date }}</p>
 				<p class="news-items-content-title">{{ news.title }}</p>
 				<a class="news-items-content-read-more">+Read more</a>
@@ -46,12 +45,12 @@
 
 <script>
 // @ is an alias to /src
-import HomeContent from '@/components/HomeContent.vue'
+//import HomeContent from '@/components/HomeContent.vue'
 
 export default {
 	name: 'Home',
 	components: {
-		HomeContent
+		//HomeContent
 	}
 }
 </script>

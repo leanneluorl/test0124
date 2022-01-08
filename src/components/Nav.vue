@@ -6,7 +6,7 @@
                 <p>Bike Fun！自行車旅遊網</p>
             </div>
         </router-link>
-        <router-link v-for="item in navItems"  @click="navigate"
+        <router-link v-for="item in navItems"
             :to="item.link" :key="item.key"
             >
             <div class="nav-item" >
@@ -41,15 +41,14 @@ export default {
         }
     },
     computed: {
-        navigate() {
 
-        }
     }
 }
 </script>
 
 <style lang="scss">
     .nav-box{
+        overflow: hidden;
         max-width: 1440px;
         position: absolute;
         bottom: 0;

@@ -1,8 +1,10 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import axios from 'axios'
 
-const routes = [
+Vue.use(VueRouter)
+
+export const routes = [
   {
     path: '/',
     name: 'Home',
@@ -38,8 +40,8 @@ const routes = [
   },
 ]
 
-const router = createRouter({
-  history: createWebHashHistory(),
+const router = new VueRouter({
+  mode: 'hash',
   routes
 })
 

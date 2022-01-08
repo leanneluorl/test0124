@@ -1,5 +1,5 @@
 <template>
-  <div class="info"></div>
+  <div class="news"></div>
 </template>
 
 <script>

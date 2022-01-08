@@ -1,11 +1,14 @@
 <template>
-<Header />
-<router-view/>
+	<div id="app">
+		<Header />
+		<router-view/>
+	</div>
 </template>
 
 <script>
 import Header from './components/Header.vue';
 export default {
+	name: 'App',
 	components: {
         // 'Navbar': () => import(`components/Nav.vue`)
 		Header

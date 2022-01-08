@@ -1,18 +1,19 @@
 <template>
-  <div class="info"></div>
+<div id="dir-box">
+	<GoogleMap />
+</div>
 </template>
 
 <script>
+import GoogleMap from '../components/GoogleMap.vue'
 export default {
+	components: {
+		GoogleMap
+	}
 
-}
+};
 </script>
 
-<style>
-.info{
-    background-color: aqua;
-    width: 100%;
-    height: 100%;
-}
+<style lang="scss">
 
 </style>

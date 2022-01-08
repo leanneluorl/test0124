@@ -4,8 +4,8 @@ module.exports = {
         : '/',
     css: {
         loaderOptions: {
-            sass: {
-                data: `
+            scss: {
+                additionalData: `
                     @import "@/assets/reset.scss";
                     @import "@/assets/_variables.scss";
                     @import "@/assets/main.scss";
