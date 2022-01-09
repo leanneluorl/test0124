@@ -4,6 +4,10 @@ body, html{
 }
 a{
     color: $txt;
+    cursor: pointer;
 }
 
+.yellow {
+    background-color: $primary-y;
+}
 

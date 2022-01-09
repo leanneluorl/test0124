@@ -1,13 +1,15 @@
 
 <template>
     <header class="header">
-        <div class="logo-image">
-            <img src="./../img/urkitchen_head.png" alt="" class="logo-white">
-        </div>
+        <router-link to="/">
+            <div class="logo-image">
+                <img src="./../img/urkitchen_head.png" alt="" class="logo-white">
+            </div>
+        </router-link>
         <div class="serach-box yellow">
             <form>
-                <input type="text" placeholder="Search Recipe..." id="searchRecipe">
-                <input type="button" onclick="searchRecipes();"/>
+                <input type="text" v-model="keywordText" placeholder="Search Recipe..." id="searchRecipe">
+                <input type="button" @click="searchRecipe(keywordText, 'viewtimes', 'desc')" />
             </form>
         </div>
         <Navbar />
@@ -16,9 +18,18 @@
 
 <script>
 import Navbar from './Nav.vue';
+
 export default {
     components: {
-        Navbar
+        Navbar,
+    },
+    data() {
+        return{
+            keywordText: ''
+        }
+    },
+    methods: {
+        
     }
 }
 </script>
@@ -28,8 +39,9 @@ export default {
         margin: 0;
         border: 0;
         font-size: 0;
-        width: auto;
-        height: 25vh;
+        width: 100%;
+        height: 50vh;
+        border-radius: 30px;
         background-color: $primary-g;
         display: flex;
         flex-flow: column;
@@ -37,6 +49,7 @@ export default {
         align-items: flex-end;
         .logo-image{
             width: 100%;
+            
             height: fit-content;
             flex: 0 1 auto;
             text-align: right;
@@ -49,18 +62,28 @@ export default {
 
         .serach-box {
             flex: 1 1 auto;
-            width: 70%;
+            width: calc(85% - 100px);
             text-align: right;
-            border-radius: 20px;
+            border-radius: 30px;
             @extend .flex;
             justify-content: center;
             align-content: center;
             align-items: center;
             font-size: 16px;
+            form {
+                width: 60%;
+                * {
+                    display: inline-block;
+                }
+            }
+            input[type='text'] {
+                width: calc( 100% - 65px);
+                height: 60px;
+            }
             input[type='button'] {
                 background: url(./../img/svg/search.svg) no-repeat center center / 80% 80%, #ccc;
-                width: 24px;
-                height:24px;
+                width: 60px;
+                height: 60px;
                 margin-left: 5px;
                 &:hover {
                     filter: contrast(1) invert(1);

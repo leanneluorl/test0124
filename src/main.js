@@ -3,6 +3,12 @@ import App from './App.vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import router from './router'
 import store from './store'
+import {func} from './utils/func.js'
+import './utils/mixin'
+
+
+Vue.prototype.$func = func
+
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyAtwtSCz3zPqzBp7tVqfsQD2LnskxjGGWw',
@@ -11,6 +17,7 @@ Vue.use(VueGoogleMaps, {
 });
 console.log(Vue.version);
 Vue.config.productionTip = false
+
 
 
 const vue = new Vue({

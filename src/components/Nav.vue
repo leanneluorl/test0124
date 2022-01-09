@@ -1,16 +1,19 @@
 <template>
     <div class="nav-box">
-        <router-link class="nav-home" to="/">
+        <router-link  to="/">
             <div class="logo-wrap">
                 <img src="./../img/logo_yellow.png" alt="" class="logo">
                 <p>Bike Fun！自行車旅遊網</p>
             </div>
         </router-link>
-        <router-link v-for="item in navItems"
-            :to="item.link" :key="item.key"
-            >
+        <router-link 
+        :class="{ 'nav-home': item.link === '' }" 
+        v-for="item in navItems"
+        :to="'/'+item.link" :key="item.key"
+        >
             <div class="nav-item" >
-                        <span class="nav-link"> {{ item.key }} </span>
+                <img :src="require(`./../img/nav/${item.link}.png`)" :alt="`icon-`+item.link" class="nav-icon">
+                <span class="nav-link"> {{ item.linkText }} </span>
             </div>
         </router-link> 
     </div>
@@ -21,21 +24,29 @@ export default {
     data() {
         return {
             navItems:[
+                // {
+                //     link: "home",
+                //     linkText: ""
+                // },
                 {
-                    link: "/news",
-                    key: "最新消息"
+                    link: "login",
+                    linkText: "Login"
+                },
+                {
+                    link: "recipe",
+                    linkText: "Recipe"
                 },
                 {   
-                    link: "/direction",
-                    key: "探索路線"
+                    link: "rummage",
+                    linkText: "Rummage"
                 },
                 {
-                    link: "/station",
-                    key: "尋找站點"
+                    link: "ur-stock",
+                    linkText: "UrStock"
                 },
                 {
-                    link: "/info",
-                    key: "常見問題"
+                    link: "ur-table",
+                    linkText: "Ur Table"
                 }
             ],
         }
@@ -53,7 +64,6 @@ export default {
         position: fixed;
         top: 0;
         left: 0;
-        width: 15%;
         height: 100%;
         line-height: 100px;
         border-radius: 0 30px 30px 0 ;
@@ -64,31 +74,31 @@ export default {
         justify-content: center;
         align-content: center;
         background-color: $primary-g-dark;
+        filter: drop-shadow(0 0 2px #00000090);
         a{  
             text-decoration: inherit;
             display: block;
             width: 100%;
-            float: left;
-            border-left: 1px solid $light-grey;
-            height: 15%;
-            &:first-of-type{
-                
-                
+            height: 100px;  
+            .nav-item{
+                height: 100%;
                 @extend .flex-nowrap;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                line-height: 100%;
-                border-left: none;
-                img{
-                    max-width: 133px;
-                }
-                font-size: 10px;
+                align-content: center;
+                font-size: 20px;
             }
+            
+            img{
+                
+            }
+            
+            
             &.router-link-exact-active {
                 color: #fff;
                 font-weight: bold;
-                background-color: $primary-o;
+                background-color: $primary-g;
             }
 
         }
