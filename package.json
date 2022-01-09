@@ -8,7 +8,7 @@
     "deploy": "sh deploy.sh"
   },
   "dependencies": {
-    "axios": "^0.24.0",
+    "axios": "^0.22.0",
     "core-js": "^3.19.1",
     "vue": "^2.6.14",
     "vue-router": "^2.8.1",
