@@ -13,7 +13,7 @@
         >
             <div class="nav-item" >
                 <img :src="require(`./../img/nav/${item.link}.png`)" :alt="`icon-`+item.link" class="nav-icon">
-                <span class="nav-link"> {{ item.linkText }} </span>
+                <p class="nav-link"> {{ item.linkText }} </p>
             </div>
         </router-link> 
     </div>
@@ -87,7 +87,7 @@ export default {
                 align-items: center;
                 justify-content: center;
                 align-content: center;
-                font-size: 20px;
+                font-size: 18px;
             }
             
             img{

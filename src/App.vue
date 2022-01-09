@@ -18,12 +18,11 @@ export default {
 
 <style lang="scss">
 #app {
-	font-family: "PingFang TC", " Noto sans", "Crimson Text";
+	@import url('https://fonts.googleapis.com/css2?family=Barlow');
+	font-family: Lucida Sans Unicode;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	
-	
+	text-align: center;	
 }
 
 
