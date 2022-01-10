@@ -1,6 +1,14 @@
 <template>
 	<div class="home-box">
-
+		<section class="catalog">
+			<h1 class="section-title">TOP popular Recipe Catalog</h1>
+			<div class="catalog-left" @click="searchRecipe('taiwan', 'viewtimes', 'desc', 'recipe')"></div>
+			<div class="catalog-right">
+				<div class="catalog-right-top-1"></div>
+				<div class="catalog-right-top-2"></div>
+				<div class="catalog-right-bottom"></div>
+			</div>
+		</section>
 	
 	</div>
 	
@@ -8,15 +16,13 @@
 
 <script>
 // @ is an alias to /src
-//import SearchRecipes from '@/components/SearchRecipes.vue'
-import { mapState} from 'vuex'
 export default {
 	name: 'Home',
 	components: {
 	
 	},
 	computed: {
-        ...mapState('Recipes', ['recipes']),
+    
     },
 	watch: {
         recipes: {
@@ -31,25 +37,53 @@ export default {
 
 <style lang="scss">
 	.home-box {
+		text-align: center;
+		section {
+			margin: auto;
+			div{
+				border-radius: 20px;
+				overflow: hidden;
+			}
+		}
+		.catalog {
+			div{
+				float: left;
+				&:after {content: "";   display: block;   padding-bottom: 100%; }
+			}
+			width: calc( 100% - 200px );
+			&-left, &-right {
+				width: 50%;
+			}
+			&-left {
+				background: url(./../img/home/taiwanese.jpg) no-repeat center center/auto 100% ;
+			}
+			&-right {
+				&-top {
+					&-1, &-2 {
+						width: 50%;
+					}
+					&-1 {
+						background: url(./../img/home/keto.jpg) no-repeat center center/auto 100% ;
+					}
+					&-2 {
+						background: url(./../img/home/vegan.jpg) no-repeat center center/auto 100% ;
+					}
+				}
+				&-bottom {
+					width: 100%;
+					height: 100%;
+					&:after { padding-bottom: 50% !important; }
+					background: url(./../img/home/japanese.jpg) no-repeat center center/auto 100% ;
+				}
+			}
+		}
 		.section-title {
-			width: 17.5%;
-			color: $primary-o;
-			font-size: 1.5rem;
-			font-weight: 500;
+			width: 100%;
+			color: $primary-g-dark;
+			font-size: 3rem;
+			font-weight: 900;
 		}
-		.divx2 {
-			width: 55%;
-		}
-		div {
-			float: left;
-			width: 27.5%;
-			height: 472px;
-			@extend .flex-nowrap;
-			justify-content: center;
-			align-items: center;
-			flex-direction: column;
-			border: 0.5px solid $border ;
-		}
+		
 		
 		a.page-link{
 			width: 11rem;

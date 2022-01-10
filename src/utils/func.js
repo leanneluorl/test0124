@@ -7,3 +7,5 @@
 // export const func = {
 
 // }
+
+console.log( this.recipes)

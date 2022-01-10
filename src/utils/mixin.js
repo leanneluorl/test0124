@@ -13,7 +13,7 @@ methods: {
             sort: "desc"
         }); 
         if(jumpTo){
-            this.$router.push('Recipe') 
+            this.$router.push(jumpTo) 
         }
     }
 }

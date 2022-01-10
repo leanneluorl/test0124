@@ -90,6 +90,10 @@ export default {
                 font-size: 18px;
             }
             
+            p{
+                color: $primary-g-dark;
+                filter: brightness( 0.65);
+            }
             img{
                 
             }
