@@ -7,14 +7,15 @@ methods: {
     ...mapActions('Recipes', ['getRecipes']),
     searchRecipe(keyword, order, sort, jumpTo) {
         console.log(keyword, order, sort)
-        this.getRecipes({
-            keyword: keyword,
-            order: "viewtimes",
-            sort: "desc"
-        }); 
+        
         if(jumpTo){
             this.$router.push(jumpTo) 
         }
+        return this.getRecipes({
+            keyword: keyword,
+            order: order,
+            sort: sort
+        }); 
     }
 }
 };

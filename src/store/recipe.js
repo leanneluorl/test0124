@@ -21,7 +21,7 @@ const Recipe = {
     actions: {
         getRecipes: ({ commit }, params) => {
             recipe.getRecipes(params).then(res => {
-                console.log(res)
+                console.log("recipe.js",res.data)
                 commit('setRecipes', res.data)
             })
         },

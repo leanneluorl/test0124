@@ -9,20 +9,33 @@
 				<div class="catalog-right-bottom"></div>
 			</div>
 		</section>
-	
+		<section class="recipe-links">
+			<!-- <RecipeLink v-for="recipe in homeRecipe" 
+				:recepiID="recipe.recepiID"
+				/> -->
+		</section>
 	</div>
 	
 </template>
 
 <script>
 // @ is an alias to /src
+// import RecipeLink from '@/components/common/recipe-link.vue';
 export default {
 	name: 'Home',
+	data:() => {
+		return {
+		
+		}
+	},
 	components: {
-	
+		// RecipeLink,
 	},
 	computed: {
-    
+		homeRecipe(){
+			console.log(this.searchRecipe("all","viewtimes","desc"))
+			return this.searchRecipe("all","viewtimes","desc")
+		}
     },
 	watch: {
         recipes: {

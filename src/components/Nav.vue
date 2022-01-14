@@ -95,7 +95,7 @@ export default {
                 filter: brightness( 0.65);
             }
             img{
-                
+                filter: drop-shadow( 0 0 1px #00000010);
             }
             
             

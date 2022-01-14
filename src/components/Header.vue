@@ -37,6 +37,7 @@ export default {
             immediate: true,
             handler() {
                 console.log("Header watch",this.recipes)
+                
             }
         },
     }
