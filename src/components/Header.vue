@@ -26,20 +26,19 @@ export default {
     data() {
         return{
             keywordText: '',
-            recipesData: this.recipes,
         }
     },
     methods: {
         
     },
     watch: {
-        recipes: {
-            immediate: true,
-            handler() {
-                console.log("Header watch",this.recipes)
+        // recipes: {
+        //     immediate: true,
+        //     handler() {
+        //         console.log("Header watch",this.recipes)
                 
-            }
-        },
+        //     }
+        // },
     }
 }
 </script>

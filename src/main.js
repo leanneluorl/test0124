@@ -15,7 +15,7 @@ Vue.use(VueGoogleMaps, {
     libraries: 'places',
   }
 });
-console.log(Vue.version);
+
 Vue.config.productionTip = false
 
 
