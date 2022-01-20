@@ -22,12 +22,8 @@ export default {
     },
     methods: {
         getImgURL(imgName) {
-            try{
-                return require("@/img/recipe/"+imgName+"-main.jpg");
-            }catch(e){
-                return require("@/img/test.jpg")
-            }
-            // return require("@/img/recipe/"+imgName+"-main.jpg");
+            let path = "@/img/recipe/"+imgName+"-main.jpg"
+            return this.checkImg(path) ;
         },
         setAltImg(e) { 
             console.log('Image failed to load');

@@ -25,6 +25,13 @@ methods: {
         })
         console.log("recipesData",recipesData)
         return recipesData
+    },
+    checkImg(path) {
+        try{
+            return require(path);
+        }catch(e){
+            return require("@/img/test.jpg")
+        }
     }
 }
 };

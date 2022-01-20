@@ -21,7 +21,7 @@ const Recipe = {
         setRecipes: (state, recipes) => {
             state.recipes = recipes;
         },
-        getCatalog: (state, catalog) => {
+        setCatalog: (state, catalog) => {
             state.catalog = catalog;
         },
     },
