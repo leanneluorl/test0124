@@ -14,7 +14,7 @@ export default {
         })
     },
 
-    getCatalog: (params) => {
+    getTable: (params) => {
         const table = params.table
         const keyword = params.keyword
         return axios({
@@ -23,4 +23,13 @@ export default {
         })
     },
     
+    getIngredient: (params) => {
+        const table = params.table
+        const keyword = params.keyword
+        const order = params.order
+        return axios({
+            url: `${adminApiURL}/${table}/${keyword}/${order}`,
+            method: 'get'
+        })
+    },
 }

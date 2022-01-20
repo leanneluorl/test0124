@@ -4,13 +4,21 @@ import { mapState, mapActions, mapGetters } from 'vuex';
 export const mixin = {
 computed: { 
     ...mapState('Recipes', ['recipes','catalog']),
-    ...mapGetters('Recipes', ['recipesGetter']),
+    ...mapGetters('Recipes', ['recipesGetter','foodTypeGetter']),
     recipesData() {
         return this.recipesGetter
+    },
+    async foodType() {
+        return await this.getCatalog({
+            table: "foodtype" ,
+            keyword: "all"})
+    },
+    ingredient() {
+        return this.ingredientGetter
     }
 },
 methods: { 
-    ...mapActions('Recipes', ['getRecipes','getCatalog']),
+    ...mapActions('Recipes', ['getRecipes','getCatalog','getIngredient','getFoodType']),
     async searchRecipe(keyword, order, sort, jumpTo) {
         console.log(keyword, order, sort)
         

@@ -8,3 +8,10 @@
     flex-wrap: nowrap;
 }
 
+.psuedo-height{
+    &:after {content: "";   display: block;   padding-bottom: 100%; }
+}
+
+@mixin psuedo-height($height: 100%) {
+    &:after {content: "";   display: block;   padding-bottom: $height; }
+}
