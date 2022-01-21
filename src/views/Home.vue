@@ -40,13 +40,12 @@ export default {
 		RecipeLink,
 	},
 	created: async function() {
-		this.searchRecipe("all","viewtimes","desc")
 		this.homeRecipes = await this.getRecipes({
 										keyword: "all",
-										sort: "viewtimes",
-										order: "desc"})
+										order: "viewtimes",
+										sort: "desc"})
 		this.homeRecipes = this.homeRecipes.slice(0,8)
-			console.log("home", this.homeRecipes);
+		console.log("home", this.homeRecipes);
 		// console.log("homeRecipes", this.homeRecipes)	
 		
 		// async function search() {

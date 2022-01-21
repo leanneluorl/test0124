@@ -1,27 +1,28 @@
 <template>
-<section class="recipe-catalogs-wrap">
-	<section class="recipe-drag-wrap">
-		<drag :ingredient="ingredientData"/>
-	</section>
-	<div v-for="(catalog, key) in catalogs" :key="key" :class="key" 
-		class="catalog-section">
-		<div class="catalog-section-title-wrap"
-			:style="urlcataBg( key+`-title`)">
-			<h2 class="catalog-section-title" >{{ catalogs[key].title }}</h2>
-		</div>
-		<div v-for="(item, index) in catalogs[key].data" 
-			:key="item.Uniq_name"
-			:class="[cataStyle(index)]"
-			:style="urlcataBg( key+`-`+item.itemID)"
-			class="recipe-catalog">
-			<p class="recipe-catalog-title">
-				{{item.item}}
-			</p>
-		</div>
+	<div class="recipe-box">
+		<h1 class="section-title main">Recipe</h1>
+		<section class="recipe-drag-wrap">
+			<drag :ingredientData="ingredientData"/>
+		</section>
+		<section class="recipe-catalogs-wrap">
+			<div v-for="(catalog, key) in catalogs" :key="key" :class="key" 
+				class="catalog-section">
+				<div class="catalog-section-title-wrap"
+					:style="bgImg( key+`-title.jpg`)">
+					<h2 class="catalog-section-title" >{{ catalogs[key].title }}</h2>
+				</div>
+				<div v-for="(item, index) in catalogs[key].data" 
+					:key="item.Uniq_name"
+					:class="[cataStyle(index)]"
+					:style="bgImg( key+`-`+item.itemID+`.jpg`)"
+					class="recipe-catalog">
+					<p class="recipe-catalog-title">
+						{{item.item}}
+					</p>
+				</div>
+			</div>
+		</section>
 	</div>
-	
-		
-	</section>
 </template>
 
 <script>
@@ -78,9 +79,6 @@ export default {
 				return "w-1x"
 			else
 				return "w-2x"
-		},
-		urlcataBg(id) {
-			return { "background-image": `url(${require(`@/img/recipe/${id}.jpg`)})`}
 		},
 		groupBy(objectArray, property) {
 			return objectArray.reduce((acc, obj) => {

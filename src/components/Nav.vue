@@ -91,8 +91,7 @@ export default {
             }
             
             p{
-                color: $primary-g-dark;
-                filter: brightness( 0.65);
+                color: $primary-g;
             }
             img{
                 filter: drop-shadow( 0 0 1px #00000010);
@@ -100,6 +99,10 @@ export default {
             
             
             &.router-link-exact-active {
+                p{
+                    color: $primary-g-dark;
+                    filter: brightness( 0.65);
+                }
                 color: #fff;
                 font-weight: bold;
                 background-color: $primary-g;

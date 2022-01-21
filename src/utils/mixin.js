@@ -8,10 +8,8 @@ computed: {
     recipesData() {
         return this.recipesGetter
     },
-    async foodType() {
-        return await this.getCatalog({
-            table: "foodtype" ,
-            keyword: "all"})
+    foodType() {
+        return this.foodTypeGetter
     },
     ingredient() {
         return this.ingredientGetter
@@ -35,12 +33,16 @@ methods: {
         return recipesData
     },
     checkImg(path) {
+        // return require(path);
         try{
             return require(path);
         }catch(e){
             return require("@/img/test.jpg")
         }
-    }
+    },
+    bgImg(img) {
+        return { "background-image": `url(${require(`@/img/recipe/${img}`)})`}
+    },
 }
 };
 

@@ -5,7 +5,7 @@
             <img 
                 @error="setAltImg"
                 :src="getImgURL(recipe.RecipeID)" 
-                :alt="recipeTitle" 
+                :alt="recipe.recipeTitle" 
                 class="recipe-link-main-image"
                 >
         </div>
@@ -21,8 +21,9 @@ export default {
         },
     },
     methods: {
-        getImgURL(imgName) {
-            let path = "@/img/recipe/"+imgName+"-main.jpg"
+        getImgURL(RecipeID) {
+            let path = "@/img/recipe/"+RecipeID+"-main.jpg";
+            console.log(path, typeof(path))
             return this.checkImg(path) ;
         },
         setAltImg(e) { 

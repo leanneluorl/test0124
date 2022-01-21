@@ -12,6 +12,13 @@ export default {
 	components: {
         // 'Navbar': () => import(`components/Nav.vue`)
 		Header
+	},
+	created: async function() {
+		await this.getFoodType({
+			table: "foodtype",
+			order: "FoodTypeID"
+		})
+		console.log("app:this.foodType",this.foodType)
 	}
 }
 </script>
