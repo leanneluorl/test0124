@@ -8,6 +8,12 @@
     flex-wrap: nowrap;
 }
 
+.flex-align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .psuedo-height{
     &:after {content: "";   display: block;   padding-bottom: 100%; }
 }

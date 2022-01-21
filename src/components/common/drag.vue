@@ -43,6 +43,7 @@
                     draggable="true"
                     @dragstart="dragStart"
                     @dragover.stop
+                    :item="ingredient.item"
                     :id="`IGD`+ingredient.itemID"
                     :style="bgImg(FTimageName(ingredient.FTimage))"
                 >
@@ -59,6 +60,7 @@ export default {
     data() {
         return {
             count: 0,
+            selection: []
         };
     },
     props: {
@@ -85,17 +87,11 @@ export default {
             /**/
             ev.preventDefault();
             const igdID = ev.dataTransfer.getData("igdID")
+            console.log(igdID);
             const igd = document.getElementById(igdID)
-            ev.target.appendChild(document.getElementById(igd));
-            // var data = ev.dataTransfer.getData("text");
-            // ev.target.appendChild(document.getElementById(data));
-            console.log(igd);
-            // var Sid = "#"+data;
-            // var selections =$(Sid).text();
-            // this.count++;
-            // if(this.count===1){	$(".selection1").append(selections);	}	
-            // if(this.count===2){	$(".selection2").append(selections);	}
-            // if(this.count===3){	$(".selection3").append(selections); 	}
+            ev.target.appendChild(igd);
+             this.selection.push(igd.getAttribute('item'))
+            console.log("this.selection",this.selection );
         }
     },
     created: function() {
@@ -105,6 +101,20 @@ export default {
 </script>
 
 <style lang="scss">
+    .igd-icon {
+        width: 40px;
+        height: 40px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 40px 40px;
+        @extend .flex-align-center;
+        p{
+            color: white;
+            font-size: 0.75rem;
+            line-height: 0.8rem;
+            word-break: break-all;
+        }
+    }
     .recipe-selection {
         margin: auto;
         width: calc(100% - 200px ); 
@@ -112,12 +122,14 @@ export default {
         min-width: 600px;
         margin-left: 100px ;
         background-size: 100% 200%;
-        @extend .flex;
-        justify-content: center;
-        align-items: center;
+        @extend .flex-align-center;
         & > div {
             width: 7vw;
             height: 7vw;
+            @extend .flex-align-center;
+            &.igd-drop-button-box {
+                flex-direction: column;
+            }
         }
         .igd-dropbox {
             border-radius: 1.5vw;
@@ -125,6 +137,7 @@ export default {
             outline: 0.4vw dotted $primary-g-light;
             margin: 2vw;
             outline-offset: 1vw;
+
         }
     }
     .drag-ingredient {
@@ -138,23 +151,14 @@ export default {
         }
         &-item{
             @extend .flex;
-            .igd-dragbox {
+        }
+        .igd-dragbox {
                 background-color: $primary-g-dark;
                 width: 50px;
                 height: 50px;
                 margin: 5px;
                 padding: 5px;
                 border-radius: 5px;
-                .igd-icon {
-                    background-repeat: no-repeat;
-                    background-position: center center;
-                    background-size: 40px 40px;
-                    p{
-                        color: white;
-                    }
-                }
-
             }
-        }
     }
 </style>
