@@ -9,13 +9,9 @@
 				<div class="catalog-right-bottom"></div>
 			</div>
 		</section>
-		<section class="recipe-links-wrap">
+		<RecipeList :recipeList="homeRecipes">
 			<h2 class="section-title">TOP popular Recipes</h2>
-			<RecipeLink v-for="recipe in homeRecipes" 
-				:recipe="recipe"
-				:key="`recipe`+recipe.RecipeID"
-				/>
-		</section>
+		</RecipeList>
 		<section class="about-wrap">
 			<h2 class="section-title">About me</h2>
 			<p>
@@ -28,7 +24,7 @@
 
 <script>
 // @ is an alias to /src
-import RecipeLink from '@/components/common/recipe-link.vue';
+import RecipeList from '@/components/recipe/RecipeList.vue';
 export default {
 	name: 'Home',
 	data:() => {
@@ -37,7 +33,7 @@ export default {
 		}
 	},
 	components: {
-		RecipeLink,
+		RecipeList
 	},
 	created: async function() {
 		this.homeRecipes = await this.getRecipes({
@@ -91,7 +87,7 @@ export default {
 		.catalog {
 			
 			div{
-				border-radius: 20px;
+				border-radius: 5vw;
 				float: left;
 				&:after {content: "";   display: block;   padding-bottom: 100%; }
 			}
@@ -123,14 +119,6 @@ export default {
 			}
 		}
 	
-		.recipe-links-wrap {
-			width: calc( 100% - 200px );
-			@extend .flex;
-			justify-content: space-between;
-			align-items: center;
-			padding-bottom: 30px;
-		}
-
 		.about-wrap {
 			min-height: 300px;
 			background-color: $primary-y;
@@ -141,8 +129,5 @@ export default {
 				filter: brightness(0.7);
 			}
 		}
-		
-		
-
 	}	
 </style>

@@ -1,18 +1,12 @@
 <template>
     <div class="nav-box">
-        <router-link  to="/">
-            <div class="logo-wrap">
-                <img src="./../img/logo_yellow.png" alt="" class="logo">
-                <p>Bike Fun！自行車旅遊網</p>
-            </div>
-        </router-link>
         <router-link 
         :class="{ 'nav-home': item.link === '' }" 
         v-for="item in navItems"
         :to="'/'+item.link" :key="item.key"
         >
             <div class="nav-item" >
-                <img :src="require(`./../img/nav/${item.link}.png`)" :alt="`icon-`+item.link" class="nav-icon">
+                <img :src="require(`@/img/nav/${item.link}.png`)" :alt="`icon-`+item.link" class="nav-icon">
                 <p class="nav-link"> {{ item.linkText }} </p>
             </div>
         </router-link> 

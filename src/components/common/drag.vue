@@ -1,12 +1,15 @@
 <template>
-<section id="IngredientSearch_box">
-    <h3 class="Head2">Find Ur Recipes</h3>
-    <p id="wordings">
+<section class="ingredient_search-box">
+    <h2 class="section-title">Find Ur Recipes</h2>
+    <p class="wordings">
     Drag and Drop the ingredien to selection box.
     <br />Search Recipes by Ingredients:
-    <span class="selection1"></span>
-    <span class="selection2"></span>
-    <span class="selection3"></span>
+    <span 
+        v-for="selection in selections" 
+        class="selection_list"
+        :key="selection">
+        {{selection}}
+    </span>
     </p>
     <div
     id="recipe-selection"
@@ -21,12 +24,12 @@
             class="igd-dropbox"
         />
         <div class="igd-drop-button-box" ondrop="drop(event)" >
-            <button class="igd-Drop-button" type="button" onclick="searchRecipebyIGD();">Find!</button>
-            <button class="igd-Drop-button" type="button" onclick="ResetsearchRecipebyIGD();">Reset</button>
+            <button class="igd-drop-button search" type="button" @click="searchRecipe">Find!</button>
+            <button class="igd-drop-button reset" type="button" onclick="ResetsearchRecipebyIGD();">Reset</button>
         </div>
     </div>
 
-    <div v-for="(foodType, key) in ingredientData"
+    <div v-for="(foodType, key) in formatIngredientData"
         :key="`foodType-`+key"
         class="drag-ingredient drag-ingredient-wrap" 
         >
@@ -60,13 +63,20 @@ export default {
     data() {
         return {
             count: 0,
-            selection: []
+            selections: [],
+            searchRecipeResult: {}
         };
     },
     props: {
         ingredientData: {
-            type: Object,
-            default: () => ({}),
+            type: Array,
+            //default: () => ([]),
+        }
+    },
+    computed: {
+        formatIngredientData() {
+            console.log("this.ingredientData in DRAG ",this.ingredientData )
+            return this.groupBy(this.ingredientData, "foodTypeID")
         }
     },
     methods: {
@@ -84,24 +94,104 @@ export default {
             ev.dataTransfer.setData("igdID", ev.target.id);
         },
         drop(ev) {
-            /**/
             ev.preventDefault();
             const igdID = ev.dataTransfer.getData("igdID")
             console.log(igdID);
             const igd = document.getElementById(igdID)
             ev.target.appendChild(igd);
-             this.selection.push(igd.getAttribute('item'))
-            console.log("this.selection",this.selection );
-        }
+            this.selections.push(igd.getAttribute('item'))
+            console.log("this.selection",this.selections );
+        },
+        searchRecipe() {
+            var jsonData = {}
+            for (var x = 1; x < 4; x++) {
+                var arrLength = this.selections.length
+                var name = "selection"+x
+                jsonData[name] = (arrLength >= x) ?  this.selections[x-1] :  ""  ;
+            }
+            console.log(jsonData)
+            this.searchRecipebyIGD(jsonData).then(res =>{
+                    console.log("res",res)
+                    this.$emit("searchResult",res.data)
+                    this.searchRecipeResult = res.data;
+                    console.log("res",this.searchRecipeResult)
+				}).catch(err => {
+					console.dir(err)
+				})
+            
+        },
+        groupBy(objectArray, property) {
+			return objectArray.reduce((acc, obj) => {
+				const key = obj[property];
+				if (!acc[key]) {
+					acc[key] = [];
+				}
+				// Add object to list for given key's value
+				acc[key].push(obj);
+				return acc;
+			}, {});
+		}
     },
     created: function() {
-        console.log(this.ingredientData)
+        
     },
 };
 </script>
 
-<style lang="scss">
-    .igd-icon {
+<style lang="scss" scoped>
+    
+    .ingredient_search-box {
+        padding: 2.5%;
+        background-color: $primary-g;
+        filter: brightness(0.95);
+        border-radius: 3vw;
+        @media only screen and (max-width: 600px) {
+            margin: 0 0 0 110px;
+            button {
+                font-size: 0.6rem;
+                line-height: 1;
+            }
+        }
+        .wordings {
+            color: $primary-g-dark;
+            filter: brightness(0.75);
+        }
+        margin: 0 110px;
+
+        & > h3, & > p {
+            padding: 20px 0 10px;
+        }
+        .selection_list {
+            background-color: $primary-g-light;
+            margin: 0 10px;
+        }
+        .igd-drop-button{
+            &-box {
+                height: 100%;
+                min-width: 50px;
+            }
+            cursor: pointer;
+            border-radius: 0.2vw;
+            min-width: 50px;
+            &.search {
+                background-color: $primary-g;
+                width: 6vw;
+                height: 6vw;
+            }
+            &.reset {
+                margin-top: 0.2vw;
+                height: 3vw;
+                width: 6vw;
+            }
+            &:hover {
+                &.search {
+                filter: brightness(1.1);
+                }
+                filter: brightness(0.9);
+                transform: scale(1.01);
+            }
+        } 
+        .igd-icon {
         width: 40px;
         height: 40px;
         background-repeat: no-repeat;
@@ -115,12 +205,9 @@ export default {
             word-break: break-all;
         }
     }
+    }
     .recipe-selection {
         margin: auto;
-        width: calc(100% - 200px ); 
-        height: 100px;
-        min-width: 600px;
-        margin-left: 100px ;
         background-size: 100% 200%;
         @extend .flex-align-center;
         & > div {
@@ -141,9 +228,11 @@ export default {
         }
     }
     .drag-ingredient {
+        &:nth-of-type(odd){
+            background: #00000005;
+        }
         @extend .flex;
         &-type {
-            margin-left: 100px;
             width: 150px;
             @extend .flex;
             align-items: center;

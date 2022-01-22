@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const recipeApiURL = "http://localhost:49000/api/UrKitchen/Recipe"
-const adminApiURL = "http://localhost:49000/api/UrKitchen/admin"
+const recipeApiURL = "http://localhost:8080/api/UrKitchen/Recipe"
+const adminApiURL = "http://localhost:8080/api/UrKitchen/admin"
 
 export default {
     getRecipes: (params) => {
@@ -30,6 +30,14 @@ export default {
         return axios({
             url: `${adminApiURL}/${table}/${keyword}/${order}`,
             method: 'get'
+        })
+    },
+
+    searchRecipebyIGD: (data) => {
+        return axios({
+            url: `${recipeApiURL}/SearchRCPbyIGD`,
+            method: 'post',
+            data
         })
     },
 }

@@ -3,7 +3,7 @@
     <header class="header">
         <router-link to="/">
             <div class="logo-image">
-                <img src="./../img/urkitchen_head.png" alt="" class="logo-white">
+                <img src="@/img/urkitchen_head.png" alt="" class="logo-white">
             </div>
         </router-link>
         <div class="serach-box yellow">
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Navbar from './Nav.vue';
+import Navbar from '@/components/layout/Nav.vue';
 
 export default {
     components: {
@@ -50,7 +50,7 @@ export default {
         font-size: 0;
         width: 100%;
         height: 50vh;
-        border-radius: 30px;
+        border-radius: 5vw;
         background-color: $primary-g;
         display: flex;
         flex-flow: column;
@@ -90,7 +90,7 @@ export default {
                 height: 60px;
             }
             input[type='button'] {
-                background: url(./../img/svg/search.svg) no-repeat center center / 80% 80%, #ccc;
+                background: url(./../../img/svg/search.svg) no-repeat center center / 80% 80%, #ccc;
                 width: 60px;
                 height: 60px;
                 margin-left: 5px;

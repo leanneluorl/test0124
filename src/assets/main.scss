@@ -6,22 +6,26 @@ body, html{
         font-size: 12px;
     }
     text-align: center;
+
     section {
         margin: auto;
         div{
             overflow: hidden;
-        }
-        .section-title {
-            &.main{
-                font-size: 3rem;
-            }
-            margin: 20px 0;
-            width: 100%;
-            color: $primary-g-dark;
-            font-size: 2rem;
-            font-weight: 900;
-        }
+        }   
     }
+
+    .section-title {
+        &.main{
+            font-size: 3rem;
+        }
+        margin: 20px 0;
+        width: 100%;
+        color: $primary-g-dark;
+        font-size: 2rem;
+        font-weight: 900;
+    }
+
+    
 }
 a{
     color: $txt;

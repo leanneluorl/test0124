@@ -44,7 +44,7 @@ export default {
         border-radius: 5px;
         width: 18vw;
         height: 18vw;
-        margin-bottom: 5px;
+        margin: 5px;
         h5 {
             color: $primary-g-dark;
             max-height: 3.6vw;

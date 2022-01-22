@@ -2,8 +2,12 @@
 	<div class="recipe-box">
 		<h1 class="section-title main">Recipe</h1>
 		<section class="recipe-drag-wrap">
-			<drag :ingredientData="ingredientData"/>
+			<drag @searchResult="passResult" :ingredientData="ingredientData"/>
 		</section>
+		<RecipeList v-if="serchResultRecipes.length" :recipeList="serchResultRecipes">
+			<h2 class="section-title">Recipes Search Results:</h2>
+			<h4>You got <span>{{serchResultRecipes.length}}</span> Recipes</h4>
+		</RecipeList>
 		<section class="recipe-catalogs-wrap">
 			<div v-for="(catalog, key) in catalogs" :key="key" :class="key" 
 				class="catalog-section">
@@ -27,11 +31,13 @@
 
 <script>
 import Drag from '@/components/common/drag.vue';
+import RecipeList from '@/components/recipe/RecipeList.vue';
 
 export default {
 	name: 'Recipe',
 	components: {
 		Drag,
+		RecipeList
 	},
 	data:() => {
 		return {
@@ -45,7 +51,8 @@ export default {
 					title: "Diet"
 				}
 			},
-			ingredientData: {}
+			ingredientData: [],
+			serchResultRecipes: {},
 		}
 	},
 	created: async function() {
@@ -53,17 +60,12 @@ export default {
 			this.catalogs[key].data = await this.getCatalog({
 													table: key ,
 													keyword: "all"})
-			console.log(key, this.catalogs[key].data);
 		}
-		this.ingredientData = this.groupBy(await this.getIngredient({
-													table: "Ingredient" ,
-													keyword: "all",
-													order: "foodtype"})
-												, "foodTypeID")
-		console.log("ingredient", this.ingredientData);
-		console.log("foodType", this.foodType);
-		
-
+		this.ingredientData = await this.getIngredient({
+												table: "Ingredient" ,
+												keyword: "all",
+												order: "foodtype"})
+	console.log("this.ingredientData in RECIPE ",this.ingredientData )
     },
 	computed: {
 		
@@ -80,16 +82,9 @@ export default {
 			else
 				return "w-2x"
 		},
-		groupBy(objectArray, property) {
-			return objectArray.reduce((acc, obj) => {
-				const key = obj[property];
-				if (!acc[key]) {
-					acc[key] = [];
-				}
-				// Add object to list for given key's value
-				acc[key].push(obj);
-				return acc;
-			}, {});
+		passResult(result) {
+			console.log("result",result)
+			this.serchResultRecipes = result
 		}
 	}
 }

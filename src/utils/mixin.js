@@ -16,7 +16,7 @@ computed: {
     }
 },
 methods: { 
-    ...mapActions('Recipes', ['getRecipes','getCatalog','getIngredient','getFoodType']),
+    ...mapActions('Recipes', ['getRecipes','getCatalog','getIngredient','getFoodType','searchRecipebyIGD']),
     async searchRecipe(keyword, order, sort, jumpTo) {
         console.log(keyword, order, sort)
         

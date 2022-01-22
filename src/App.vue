@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Header from './components/Header.vue';
+import Header from './components/layout/Header.vue';
 export default {
 	name: 'App',
 	components: {
@@ -18,7 +18,6 @@ export default {
 			table: "foodtype",
 			order: "FoodTypeID"
 		})
-		console.log("app:this.foodType",this.foodType)
 	}
 }
 </script>
