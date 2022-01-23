@@ -1,0 +1,79 @@
+<template>
+	<div class="recipe-catalog-box">
+		<div :style="bgImg( typeData[0]+`-`+typeData[1]+`.jpg`)"
+			class="recipe-catalog">
+			<p class="recipe-catalog-title">
+				{{searchKeywordData}}
+			</p>
+		</div>
+		<RecipeList 
+			:recipeList="recipes"
+			>
+			<!-- <h2 ref="resultTag"  class="section-title">Recipes Search Results:</h2> -->
+			<h4>You got <span>{{recipes.length}}</span> Recipes</h4>
+			<template v-slot:backTo>
+				<a class="back_to" @click="$router.go(-1)"><h4>Back to <span>Last page</span></h4></a>
+			</template>
+		</RecipeList>
+	</div>
+</template>
+
+<script>
+import RecipeList from '@/components/recipe/RecipeList.vue';
+
+export default {
+	name: 'Recipe_Catalog',
+	components: {
+		RecipeList,
+	},
+	props: {
+
+	},
+	data:() => {
+		return {
+			serchResultStatus: false,
+			dragKey: 0
+		}
+	},
+	created: function() {
+		console.log('this.searchKeywordData',this.searchKeywordData);
+		console.log('this.search',this.typeData);
+		console.log('this.search',this.typeData[0]);
+		console.log('this.search',this.typeData[1]);
+		console.log(this.cuisine)    	
+		console.log(this.diettype)
+    },
+	updated: function(){
+		
+	},
+	methods: {
+		
+	},
+	watch: {
+		
+	}
+}
+</script>
+
+<style lang="scss">
+	.recipe-catalog {
+		margin: 3vw auto;
+		width: calc( 100% - 220px);
+		height: 100px;
+		background-position: center;
+		background-size: cover;
+		border-radius: 1.5vw;
+		position: relative;
+		&-title{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			color: white;
+			font-weight: 900;
+			filter: drop-shadow(0 0 2px #000000);
+			font-size: 1.5rem;
+			line-height: 1.5rem;
+		}
+	}
+</style>

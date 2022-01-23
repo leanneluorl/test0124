@@ -2,11 +2,11 @@
 	<div class="home-box">
 		<section class="catalog">
 			<h1 class="section-title main">Recipe Catalog</h1>
-			<div class="catalog-left" @click="searchRecipe('taiwan', 'viewtimes', 'desc', 'recipe')"></div>
+			<div class="catalog-left" @click="searchRecipe(cuisine[2].item, 'viewtimes', 'desc', 'recipe_catalog', ['cuisine',3])"></div>
 			<div class="catalog-right">
-				<div class="catalog-right-top-1"></div>
-				<div class="catalog-right-top-2"></div>
-				<div class="catalog-right-bottom"></div>
+				<div class="catalog-right-top-1" @click="searchRecipe(diettype[1].item, 'viewtimes', 'desc', 'recipe_catalog', ['diettype',2])"></div>
+				<div class="catalog-right-top-2" @click="searchRecipe(diettype[2].item, 'viewtimes', 'desc', 'recipe_catalog', ['diettype',3])"></div>
+				<div class="catalog-right-bottom" @click="searchRecipe(cuisine[1].item, 'viewtimes', 'desc', 'recipe_catalog', ['cuisine',2])"></div>
 			</div>
 		</section>
 		<RecipeList :recipeList="homeRecipes">
@@ -29,7 +29,7 @@ export default {
 	name: 'Home',
 	data:() => {
 		return {
-			homeRecipes: {},
+			homeRecipes: [],
 		}
 	},
 	components: {
@@ -63,13 +63,6 @@ export default {
 		// }
 	},
 	watch: {
-        recipes: {
-            immediate: true,
-            handler(){
-				// this.homeRecipes = this.recipes.slice(0,8)
-                console.log("Home watch",this.recipes)
-            }
-        }
     }
 }
 </script>
@@ -90,6 +83,7 @@ export default {
 				border-radius: 5vw;
 				float: left;
 				&:after {content: "";   display: block;   padding-bottom: 100%; }
+				
 			}
 			width: calc( 100% - 200px );
 			&-left, &-right {

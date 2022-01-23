@@ -1,26 +1,31 @@
 <template>
 	<div class="recipe-box">
 		<h1 class="section-title main">Recipe</h1>
-		<section class="recipe-drag-wrap">
-			<drag @searchResult="passResult" :ingredientData="ingredientData"/>
+		<section class="recipe-drag-wrap" ref="dragTag">
+			<drag @searchResult="passResult" @resetDrag="resetDrag" :ingredientData="ingredientData" :key="dragKey" />
 		</section>
-		<RecipeList v-if="serchResultRecipes.length" :recipeList="serchResultRecipes">
-			<h2 class="section-title">Recipes Search Results:</h2>
+		<RecipeList v-if="serchResultRecipes.length" 
+			:recipeList="serchResultRecipes"
+			>
+			<h2 ref="resultTag"  class="section-title">Recipes Search Results:</h2>
 			<h4>You got <span>{{serchResultRecipes.length}}</span> Recipes</h4>
+			<template v-slot:backTo>
+				<a class="back_to" @click="scrollPageTo('dragTag')"><h4>Back to <span>Search</span></h4></a>
+			</template>
 		</RecipeList>
-		<section class="recipe-catalogs-wrap">
+		<section class="recipe-catalog-wrap">
 			<div v-for="(catalog, key) in catalogs" :key="key" :class="key" 
-				class="catalog-section">
-				<div class="catalog-section-title-wrap"
+				class="recipe-catalog-group">
+				<div class="recipe-catalog-group-title-wrap"
 					:style="bgImg( key+`-title.jpg`)">
-					<h2 class="catalog-section-title" >{{ catalogs[key].title }}</h2>
+					<h2 class="recipe-catalog-group-title" >{{ catalogs[key].title }}</h2>
 				</div>
 				<div v-for="(item, index) in catalogs[key].data" 
 					:key="item.Uniq_name"
 					:class="[cataStyle(index)]"
 					:style="bgImg( key+`-`+item.itemID+`.jpg`)"
 					class="recipe-catalog">
-					<p class="recipe-catalog-title">
+					<p class="recipe-catalog-item">
 						{{item.item}}
 					</p>
 				</div>
@@ -30,14 +35,14 @@
 </template>
 
 <script>
-import Drag from '@/components/common/drag.vue';
+import Drag from '@/components/recipe/Drag.vue';
 import RecipeList from '@/components/recipe/RecipeList.vue';
 
 export default {
 	name: 'Recipe',
 	components: {
 		Drag,
-		RecipeList
+		RecipeList,
 	},
 	data:() => {
 		return {
@@ -53,6 +58,8 @@ export default {
 			},
 			ingredientData: [],
 			serchResultRecipes: {},
+			serchResultStatus: false,
+			dragKey: 0
 		}
 	},
 	created: async function() {
@@ -65,9 +72,11 @@ export default {
 												table: "Ingredient" ,
 												keyword: "all",
 												order: "foodtype"})
-	console.log("this.ingredientData in RECIPE ",this.ingredientData )
     },
-	computed: {
+	updated: function(){
+		if(this.serchResultRecipes.length){
+			this.scrollPageTo("resultTag")
+		}
 		
 	},
 	methods: {
@@ -82,16 +91,26 @@ export default {
 			else
 				return "w-2x"
 		},
-		passResult(result) {
-			console.log("result",result)
+		passResult(res) {
+			console.log("result",res)
+			if(res.status === "201"){
+				this.serchResultStatus = true
+			}
+			this.serchResultRecipes = res.data
+		},
+		resetDrag(result) {
 			this.serchResultRecipes = result
+			this.dragKey += 1
 		}
+	},
+	watch: {
+		
 	}
 }
 </script>
 
 <style lang="scss">
-	.recipe-catalogs-wrap {
+	.recipe-catalog-wrap {
 		@media only screen and (max-width: 600px) {
 			width: calc(100% - 100px);
 			margin-left: 100px;
@@ -99,15 +118,19 @@ export default {
 				width: calc(50% - 10px);
 			}
 		}
-		width: calc(100% - 200px);
+		margin-top: 30px;
+		border: 2px solid $primary-g;
+		border-radius: 3vw;
+		overflow: hidden;
+		width: calc(100% - 220px);
 		padding: 5px;
-		.catalog-section-title-wrap {
+		.recipe-catalog-group-title-wrap {
 			width: 100%;
 			height: 100px;
 			background-position: center;
 			background-size: cover;
 		}
-		.catalog-section {
+		.recipe-catalog-group {
 			width: 100%;
 			@extend .flex;
 			justify-content: flex-start;
@@ -128,7 +151,7 @@ export default {
 			@include psuedo-height($height: 50%);
 		}
 
-		&-title{
+		&-item{
 			position: absolute;
 			top: 50%;
 			left: 50%;
@@ -139,8 +162,5 @@ export default {
 			font-size: 1.5rem;
 			line-height: 1.5rem;
 		}
-	}
-	h2{
-		background: url(./../img/test.jpg) no-repeat/ cover;
 	}
 </style>

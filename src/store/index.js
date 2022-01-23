@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Recipes from './recipe'
+import User from './user'
 // import axios from 'axios'
 
 Vue.use(Vuex)
@@ -27,7 +28,8 @@ const store = new Vuex.Store({
     actions: {
     },
     modules: {
-        Recipes: Recipes
+        Recipes: Recipes,
+        User: User,
     }
 })
 

@@ -1,13 +1,14 @@
 <template>
     <div class="recipe-link">
         <h5 class="recepi-link-title">{{recipe.RecipeTitle}}</h5> 
-        <div class="recipe-link-main-image-wrap">
-            <img 
+        <div class="recipe-link-main-image-wrap"
+            :style="bgImg( `recipe-`+recipe.RecipeID+`-main.jpg`)">
+            <!-- <img 
                 @error="setAltImg"
                 :src="getImgURL(recipe.RecipeID)" 
                 :alt="recipe.recipeTitle" 
                 class="recipe-link-main-image"
-                >
+                > -->
         </div>
     </div>
 </template>
@@ -22,9 +23,9 @@ export default {
     },
     methods: {
         getImgURL(RecipeID) {
-            let path = "@/img/recipe/"+RecipeID+"-main.jpg";
+            let path = `@/img/recipe/recipe-${RecipeID}-main.jpg`;
             console.log(path, typeof(path))
-            return this.checkImg(path) ;
+            return path;//this.checkImg(path) ;
         },
         setAltImg(e) { 
             console.log('Image failed to load');
@@ -41,10 +42,14 @@ export default {
             height: calc( (100vw - 210px) / 2 );
         }
         border: 2px solid $primary-g-dark;
-        border-radius: 5px;
-        width: 18vw;
-        height: 18vw;
-        margin: 5px;
+        border-radius: 1vw;
+        width: 24%;
+        margin: .5%;
+        &-main-image-wrap{
+            background-size: cover;
+            background-position: center center;
+            @include psuedo-height($height:85%);
+        }
         h5 {
             color: $primary-g-dark;
             max-height: 3.6vw;

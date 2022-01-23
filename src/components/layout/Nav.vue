@@ -1,11 +1,17 @@
 <template>
     <div class="nav-box">
+        <a >
+            <div class="nav-item" @click="clickLogin('user')">
+                <img :src="require(`@/img/nav/login.png`)" alt="icon-login" class="nav-icon">
+                <p class="nav-link"> {{ userID ? userID : 'Login' }} </p>
+            </div>
+        </a>
         <router-link 
         :class="{ 'nav-home': item.link === '' }" 
         v-for="item in navItems"
         :to="'/'+item.link" :key="item.key"
         >
-            <div class="nav-item" >
+            <div class="nav-item" @click="clickLogin(item.link)">
                 <img :src="require(`@/img/nav/${item.link}.png`)" :alt="`icon-`+item.link" class="nav-icon">
                 <p class="nav-link"> {{ item.linkText }} </p>
             </div>
@@ -14,18 +20,19 @@
 </template>
 
 <script>
+
 export default {
-    data() {
+    data:() => {
         return {
             navItems:[
                 // {
                 //     link: "home",
                 //     linkText: ""
                 // },
-                {
-                    link: "login",
-                    linkText: "Login"
-                },
+                // {
+                //     link: "login",
+                //     linkText: "Login"
+                // },
                 {
                     link: "recipe",
                     linkText: "Recipe"
@@ -45,8 +52,16 @@ export default {
             ],
         }
     },
-    computed: {
+    components: {
 
+	},
+    computed: {
+        // userLink() {
+        //     userID? return return '/user' : return '';
+        // }
+    },
+    methods: {
+        
     }
 }
 </script>
@@ -56,6 +71,7 @@ export default {
         overflow: hidden;
         width: 100px;
         position: fixed;
+        z-index: 999;
         top: 0;
         left: 0;
         height: 100%;

@@ -10,11 +10,13 @@ const Recipe = {
         recipes: {},
         catalog: {},
         cuisine: {},
-        diet: {},
-        foodType: {},
+        diettype: {},
+        foodtype: {},
         ingredient: {},
         instruction: {},
         recipeIngredient: {},
+        searchKeyword: 'test',
+        type: []
         
     }),
     mutations: {
@@ -24,24 +26,38 @@ const Recipe = {
         setCatalog: (state, catalog) => {
             state.catalog = catalog;
         },
+        setCuisine: (state, cuisine) => {
+            state.cuisine = cuisine;
+        },
+        setDiettype: (state, diettype) => {
+            state.diettype = diettype;
+        },
         setIngredient: (state, ingredient) => {
             state.ingredient = ingredient;
         },
-        setFoodType: (state, foodType) => {
-            state.foodType = foodType;
+        setFoodtype: (state, foodtype) => {
+            state.foodtype = foodtype;
+        },
+        setSearchKeyword: (state, searchKeyword) => {
+            console.log("setKeyword")
+            state.searchKeyword = searchKeyword;
+        },
+        setType: (state, type) => {
+            state.type = type;
         },
     },
     actions: {
         getRecipes: ({ commit }, params) => {
             return recipe.getRecipes(params).then(res => {
-                console.log("recipe.js",res.data)
                 commit('setRecipes', res.data)  
                 return res.data
             })
         },
         getCatalog: ({ commit }, params) => {
             return recipe.getTable(params).then(res => {
-                commit('setCatalog', res.data)  
+                const dataSetter = 'set' + params.table.charAt(0).toUpperCase() + params.table.slice(1);
+                console.log(dataSetter );
+                commit( dataSetter, res.data) 
                 return res.data
             })
         },
@@ -51,9 +67,9 @@ const Recipe = {
                 return res.data
             })
         },
-        getFoodType: ({ commit }) => {
+        getFoodtype: ({ commit }) => {
             return recipe.getTable({table:"foodtype", keyword: "all"}).then(res => {
-                commit('setFoodType', res.data)  
+                commit('setFoodtype', res.data)  
                 return res.data
             })
         },
@@ -69,16 +85,28 @@ const Recipe = {
             });
 
         },
+        getSearchKeyword: ({ commit }, data) => {
+            commit('setSearchKeyword', data)  
+        },
+        getType: ({ commit }, data) => {
+            commit('setType', data)  
+        },
     },
     getters: {
         recipesGetter: (state) => {
             return state.recipes || {}
         },
-        foodTypeGetter: (state) => {
-            return state.foodType || {}
+        foodtypeGetter: (state) => {
+            return state.foodtype || {}
         },
         ingredientGetter: (state) => {
             return state.ingredient || {}
+        },
+        cuisineGetter: (state) => {
+            return state.cuisine|| {}
+        },
+        diettypeGetter: (state) => {
+            return state.diettype || {}
         },
     }
 }

@@ -25,20 +25,20 @@
         />
         <div class="igd-drop-button-box" ondrop="drop(event)" >
             <button class="igd-drop-button search" type="button" @click="searchRecipe">Find!</button>
-            <button class="igd-drop-button reset" type="button" onclick="ResetsearchRecipebyIGD();">Reset</button>
+            <button class="igd-drop-button reset" type="button" @click="ResetSearchResult">Reset</button>
         </div>
     </div>
 
-    <div v-for="(foodType, key) in formatIngredientData"
-        :key="`foodType-`+key"
+    <div v-for="(foodtype, key) in formatIngredientData"
+        :key="`foodtype-`+key"
         class="drag-ingredient drag-ingredient-wrap" 
         >
         <div class="drag-ingredient-type">
-            <h6 class="Head2-foodtype">{{ foodTypeName(key) }}</h6>
+            <h6 class="Head2-foodtype">{{ foodtypeName(key) }}</h6>
         </div>
         <div class="drag-ingredient-item" >
             <div class="igd-dragbox" 
-                v-for="ingredient in foodType"
+                v-for="ingredient in foodtype"
                 :key="`ingredient-`+ingredient.itemID" 
                 >
                 <div
@@ -75,13 +75,12 @@ export default {
     },
     computed: {
         formatIngredientData() {
-            console.log("this.ingredientData in DRAG ",this.ingredientData )
-            return this.groupBy(this.ingredientData, "foodTypeID")
+            return this.groupBy(this.ingredientData, "foodTypeID") //Database setting, "foodTypeID" case sensitive 
         }
     },
     methods: {
-        foodTypeName(key) {
-            return this.foodType[key].item
+        foodtypeName(key) {
+            return this.foodtype[key-1].item
         },
         FTimageName(FTimage) {
             return FTimage.replace("'image/",'').replace("'",'')
@@ -104,20 +103,27 @@ export default {
         },
         searchRecipe() {
             var jsonData = {}
+            var arrLength = this.selections.length
+            if( arrLength === 0 ){
+                alert("Please slect the ingredient/s")
+                return
+            }
             for (var x = 1; x < 4; x++) {
-                var arrLength = this.selections.length
                 var name = "selection"+x
                 jsonData[name] = (arrLength >= x) ?  this.selections[x-1] :  ""  ;
             }
             console.log(jsonData)
             this.searchRecipebyIGD(jsonData).then(res =>{
                     console.log("res",res)
-                    this.$emit("searchResult",res.data)
-                    this.searchRecipeResult = res.data;
-                    console.log("res",this.searchRecipeResult)
+                    this.$emit("searchResult",res)
 				}).catch(err => {
 					console.dir(err)
 				})
+            
+        },
+        ResetSearchResult() {
+            // this.$router.go()
+            this.$emit("resetDrag",'')
             
         },
         groupBy(objectArray, property) {
@@ -144,7 +150,7 @@ export default {
         padding: 2.5%;
         background-color: $primary-g;
         filter: brightness(0.95);
-        border-radius: 3vw;
+        padding: 0 110px;
         @media only screen and (max-width: 600px) {
             margin: 0 0 0 110px;
             button {
@@ -156,7 +162,7 @@ export default {
             color: $primary-g-dark;
             filter: brightness(0.75);
         }
-        margin: 0 110px;
+        
 
         & > h3, & > p {
             padding: 20px 0 10px;

@@ -4,7 +4,8 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 import router from './router'
 import store from './store'
 import {func} from './utils/func.js'
-import './utils/mixin'
+import './utils/recipeMixin'
+import './utils/userMixin'
 
 
 Vue.prototype.$func = func

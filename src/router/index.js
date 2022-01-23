@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
+
 Vue.use(VueRouter)
 
 export const routes = [
@@ -10,11 +11,11 @@ export const routes = [
     name: 'Home',
     component: Home
   },
-  {
-    path: '/login',
-    name: 'Login',
-    component: Home
-  },
+  // {
+  //   path: '/login',
+  //   name: 'Login',
+  //   component: Login
+  // },
   {
     path: '/recipe',
     name: 'Recipe',
@@ -24,14 +25,19 @@ export const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Recipe.vue')
   },
   {
+    path: '/recipe_catalog',
+    name: 'RecipeCatalog',
+    component: () => import('../views/RecipeCatalog.vue')
+  },
+  {
     path: '/rummage',
     name: 'Rummage',
-    component: () => import('../views/News.vue')
+    component: () => import('../views/Rummage.vue')
   },
   {
     path: '/ur-stock',
     name: 'UrStock',
-    component: () => import('../views/Info.vue')
+    component: () => import('../views/News.vue')
   },
   {
     path: '/ur-table',
@@ -39,9 +45,9 @@ export const routes = [
     component: () => import('../views/Direction.vue')
   },
   {
-    path: '/station',
-    name: 'Station',
-    component: () => import('../views/Station.vue')
+    path: '/user',
+    name: 'User',
+    component: () => import('@/views/User.vue')
   },
 ]
 
