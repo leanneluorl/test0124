@@ -1,36 +1,50 @@
 <template>
 	<div id="app">
-		<Header />
-		<router-view/>
-		<Login v-show="loginPOP" />
+		<h1 class="count">Count: {{ count1 }}</h1>
+		<div class="main-button" @click="showPopUp" >Show POP up window</div>
+		<PopUp v-show="popUpShow"  
+			@close-edit="closeEdit()"
+			@count="Increment"/>
 	</div>
 </template>
 
 <script>
-import Header from './components/layout/Header.vue';
-import Login from '@/components/function/Login.vue';
-import { mapState } from 'vuex';
+// import { mapState, mapActions } from 'vuex';
+
+import PopUp from '@/components/function/PopUp.vue';
+
 export default {
 	name: 'App',
 	components: {
-        // 'Navbar': () => import(`components/Nav.vue`)
-		Header,
-		Login
+		PopUp
 	},
 	computed: {
-		...mapState('User', ['loginPOP']),
+		// ...mapState('Store', ['count']),
+       
 	},
 	data:() =>{
         return {
-			defaultData: ['cuisine','diettype', 'foodtype']
+			popUpShow: false,
+			count1: 0,
         }
     },
 	created: async function() {
-		for (var i = 0; i < this.defaultData.length; i++) {
-			this.defaultData[i] = await this.getCatalog({
-													table: this.defaultData[i],
-													keyword: "all"})
-		}	
+		
+	},
+	methods: {
+		// ...mapActions('Store', ['getCount']),
+
+		showPopUp() {
+			this.popUpShow = true
+		},
+		closeEdit() {
+			this.popUpShow = false
+		},
+		Increment(num){
+			this.count1 += num
+			// this.$store.dispatch('getCount',num)
+			// console.log(this.count1)
+		}
 	}
 }
 </script>
@@ -43,6 +57,19 @@ export default {
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;	
 }
+
+.main{
+		&-button {
+			cursor: pointer;
+			text-align: center;
+			margin: 100px auto;
+			width: 200px;
+			height: 60px;
+			background-color: aquamarine;
+			line-height: 60px;
+			border-radius: 5px;
+		}
+	}
 
 
 </style>
