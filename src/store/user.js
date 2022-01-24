@@ -44,6 +44,7 @@ const User = {
                     commit('setUser', res.data)  
                     commit('setUserID', res.data.UserID)  
                     commit('setloginPOP', false)  
+                    alert("Login success!")
                 }
                 return res.data
             })

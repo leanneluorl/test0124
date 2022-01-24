@@ -9,9 +9,9 @@
 				<div class="catalog-right-bottom" @click="searchRecipe(cuisine[1].item, 'viewtimes', 'desc', 'recipe_catalog', ['cuisine',2])"></div>
 			</div>
 		</section>
-		<RecipeList :recipeList="homeRecipes">
+		<!-- <RecipeList :recipeList="homeRecipes">
 			<h2 class="section-title">TOP popular Recipes</h2>
-		</RecipeList>
+		</RecipeList> -->
 		<section class="about-wrap">
 			<h2 class="section-title">About me</h2>
 			<p>
@@ -24,7 +24,7 @@
 
 <script>
 // @ is an alias to /src
-import RecipeList from '@/components/recipe/RecipeList.vue';
+// import RecipeList from '@/components/recipe/RecipeList.vue';
 export default {
 	name: 'Home',
 	data:() => {
@@ -33,7 +33,7 @@ export default {
 		}
 	},
 	components: {
-		RecipeList
+		// RecipeList
 	},
 	created: async function() {
 		this.homeRecipes = await this.getRecipes({

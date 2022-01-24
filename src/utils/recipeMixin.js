@@ -64,7 +64,7 @@ export const recipeMixin = {
             try{
                 return { "background-image": `url(${require(`@/img/recipe/${img}`)})`}
             }catch(e){
-                return { "background-image": `url(${require(`@/img/recipe/test.jpg`)})`}
+                return { "background-image": `url(${require(`@/img/test.jpg`)})`}
             }
             
         },

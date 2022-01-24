@@ -2,7 +2,7 @@
     <div class="nav-box">
         <a >
             <div class="nav-item" @click="clickLogin('user')">
-                <img :src="require(`@/img/nav/login.png`)" alt="icon-login" class="nav-icon">
+                <img src="@/img/nav/login.png" alt="icon-login" class="nav-icon">
                 <p class="nav-link"> {{ userID ? userID : 'Login' }} </p>
             </div>
         </a>
