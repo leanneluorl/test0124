@@ -2,6 +2,8 @@
 <div class="pop-wrap">
     <div class="pop">
         <div class="close" @click="clickCloseEdit()"></div>
+        <slot name="title"></slot>
+        <slot name="content"></slot>
         <form>
         <table class="input-table">
             <tbody>

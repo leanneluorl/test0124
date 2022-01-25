@@ -4,7 +4,19 @@
 		<div class="main-button" @click="showPopUp" >Show POP up window</div>
 		<PopUp v-show="popUpShow"  
 			@close-edit="closeEdit()"
-			@count="Increment"/>
+			@count="Increment">
+			<template v-slot:title>
+				<p class="title"> 
+					Custom Title 
+				</p>
+			</template>
+			<template v-slot:content>
+				<p class="content"> 
+					Custom Content
+				</p>
+			</template>
+		</PopUp>
+
 	</div>
 </template>
 
@@ -68,6 +80,10 @@ export default {
 			background-color: aquamarine;
 			line-height: 60px;
 			border-radius: 5px;
+		}
+		.title {
+			width: 100%;
+			background-color: gray;
 		}
 	}
 
