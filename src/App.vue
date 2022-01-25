@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<h1 class="count">Count: {{ count1 }}</h1>
+		<h1 class="count">Count: {{ count }}</h1>
 		<div class="main-button" @click="showPopUp" >Show POP up window</div>
 		<PopUp v-show="popUpShow"  
 			@close-edit="closeEdit()"
@@ -21,8 +21,7 @@
 </template>
 
 <script>
-// import { mapState, mapActions } from 'vuex';
-
+import { mapState, mapActions } from 'vuex';
 import PopUp from '@/components/function/PopUp.vue';
 
 export default {
@@ -31,7 +30,7 @@ export default {
 		PopUp,
 	},
 	computed: {
-		// ...mapState('Store', ['count']),
+		...mapState(['count']),
 		
 	},
 	data:() =>{
@@ -46,7 +45,7 @@ export default {
 		this.printRandomNumber()
 	},
 	methods: {
-		// ...mapActions('Store', ['getCount']),
+		...mapActions(['getCount']),
 
 		showPopUp() {
 			this.popUpShow = true
@@ -56,8 +55,9 @@ export default {
 		},
 		Increment(num){
 			this.count1 += num
+			console.log(this.count)
 			// this.$store.dispatch('getCount',num)
-			// console.log(this.count1)
+			console.log("Increment")
 		},
 		printRandomNumber() {
 		var min = 1,

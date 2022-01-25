@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
     name: 'pop',
     data:() => {
@@ -63,11 +64,13 @@ export default {
         
     },
     methods: {
+        ...mapActions(['getCount']),
         clickCloseEdit() {
             this.$emit('close-edit',false)
         },
         count(num) {
             this.$emit('count', num)
+            this.getCount(num)
         },
         resetInput() {
             this.title = ''

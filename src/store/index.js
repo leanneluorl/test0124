@@ -10,16 +10,17 @@ const store = new Vuex.Store({
     },
     mutations: {
         setCount:  (state, count) => {
-            state.count = count;
+            state.count += count;
         },
     },
     actions: {
         getCount: ({ commit }, num) => {
+            console.log("getCount")
             commit('setCount', num)  
         },
     },
     modules: {
-       
+
     }
 })
 
