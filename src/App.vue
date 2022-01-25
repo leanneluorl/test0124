@@ -16,7 +16,7 @@
 				</p>
 			</template>
 		</PopUp>
-
+		<p>Random Number: {{ randomNum }}</p>
 	</div>
 </template>
 
@@ -28,20 +28,22 @@ import PopUp from '@/components/function/PopUp.vue';
 export default {
 	name: 'App',
 	components: {
-		PopUp
+		PopUp,
 	},
 	computed: {
 		// ...mapState('Store', ['count']),
-       
+		
 	},
 	data:() =>{
         return {
 			popUpShow: false,
 			count1: 0,
+			randomNum: 0,
+			interval: 0,
         }
     },
-	created: async function() {
-		
+	created: function() {
+		this.printRandomNumber()
 	},
 	methods: {
 		// ...mapActions('Store', ['getCount']),
@@ -56,6 +58,13 @@ export default {
 			this.count1 += num
 			// this.$store.dispatch('getCount',num)
 			// console.log(this.count1)
+		},
+		printRandomNumber() {
+		var min = 1,
+			max = 5;
+		this.randomNum = Math.floor(Math.random() * (max - min + 1) + min); //Generate Random number between 5 - 10
+		
+		setTimeout(this.printRandomNumber, this.randomNum * 1000);
 		}
 	}
 }
